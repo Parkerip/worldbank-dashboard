@@ -11,7 +11,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'your-secret-key-here'  # Change this in production!
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Hosts allowed to access this app
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "worldbank-dashboard-nwkz.onrender.com",  # Render domain
+]
+
+# CSRF trusted origins (needed for HTTPS on Render)
+CSRF_TRUSTED_ORIGINS = [
+    "https://worldbank-dashboard-nwkz.onrender.com"
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -58,9 +69,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend_project.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# Database (SQLite for dev, can swap for Postgres on Render)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -68,7 +77,7 @@ DATABASES = {
     }
 }
 
-# For production - comment this out for local development
+# If you want to use dj-database-url for Render Postgres:
 # try:
 #     import dj_database_url
 #     DATABASES['default'] = dj_database_url.config(default='sqlite:///db.sqlite3')
@@ -76,39 +85,22 @@ DATABASES = {
 #     pass
 
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+# Static files
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -124,8 +116,9 @@ REST_FRAMEWORK = {
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
+    "http://localhost:4200",  # Angular local
     "http://127.0.0.1:4200",
+    "https://worldbank-dashboard-nwkz.onrender.com",  # Allow frontend to call backend
 ]
 
 CORS_ALLOW_CREDENTIALS = True
