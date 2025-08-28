@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: django-backend
+    env: python
+    plan: free
+    buildCommand: "cd backend && pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "cd backend && gunicorn your_project.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: "False"
+
+  - type: web
+    name: angular-frontend
+    env: static
+    plan: free
+    buildCommand: "cd frontend && npm install && npm run build -- --configuration production"
+    staticPublishPath: "./frontend/dist/your-project-name"

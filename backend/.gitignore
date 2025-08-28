@@ -1,0 +1,33 @@
+# Django
+*.pyc
+__pycache__/
+*.sqlite3
+.env
+.env.local
+.env.production
+.vscode/
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# Angular
+/dist
+/node_modules
+/.angular
+/.vscode
+/.idea
+*.tgz
+*.tar.gz
+.cache/
+.lib/
+.npm
+.yarn-integrity
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
