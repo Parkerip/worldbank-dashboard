@@ -1,17 +1,14 @@
 services:
   - type: web
-    name: django-backend
+    name: worldbank-django-backend
     env: python
     plan: free
-    buildCommand: "cd backend && pip install -r requirements.txt && python manage.py collectstatic --noinput"
-    startCommand: "cd backend && gunicorn your_project.wsgi:application"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn backend_project.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: DEBUG
         value: "False"
-
-  - type: web
-    name: angular-frontend
-    env: static
-    plan: free
-    buildCommand: "cd frontend && npm install && npm run build -- --configuration production"
-    staticPublishPath: "./frontend/dist/your-project-name"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        value: ".onrender.com"
