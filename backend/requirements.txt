@@ -5,11 +5,11 @@ dj-database-url==3.0.1
 Django==5.2.5
 django-cors-headers==4.7.0
 djangorestframework==3.16.1
-gunicorn==21.2.0  # ← ADD THIS LINE
+gunicorn==21.2.0
 idna==3.10
-psycopg2-binary==2.9.9  # ← ADD THIS FOR POSTGRESQL
+psycopg2-binary==2.9.9  # ← ADD THIS LINE FOR POSTGRESQL
 requests==2.32.5
 sqlparse==0.5.3
 tzdata==2025.2
 urllib3==2.5.0
-whitenoise==6.6.0  # ← ADD THIS FOR STATIC FILES
+whitenoise==6.6.0
